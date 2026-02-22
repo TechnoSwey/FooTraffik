@@ -1,0 +1,648 @@
+:root {
+    --bg-primary: #1a1f2e;
+    --bg-secondary: #242b3f;
+    --bg-card: #2a3147;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a8c0;
+    --accent-green: #22c55e;
+    --accent-blue: #3b82f6;
+    --accent-orange: #f97316;
+    --border-color: #3a4259;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+#app {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    min-height: 100vh;
+}
+
+/* Экраны */
+.screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.screen.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Загрузка */
+#loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding: 12px 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-green);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.ovr-badge {
+    background: linear-gradient(135deg, var(--accent-green), #15803d);
+    padding: 8px 16px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.ovr-value {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+}
+
+.ovr-label {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* Графики */
+.chart-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border-color);
+    height: 250px;
+}
+
+/* Секции */
+.section {
+    margin-bottom: 24px;
+}
+
+.section h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+/* Уровни команд */
+.team-levels {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.team-level-item {
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.team-level-item:last-child {
+    margin-bottom: 0;
+}
+
+.team-level-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.progress-bar-container {
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.reached-badge {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    color: var(--accent-green);
+    font-size: 12px;
+}
+
+/* Карточка тренировки */
+.training-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.training-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.badge {
+    background: var(--accent-green);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.duration {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.training-exercises {
+    margin: 16px 0;
+}
+
+.exercise-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exercise-item:last-child {
+    border-bottom: none;
+}
+
+.exercise-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.exercise-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.exercise-duration {
+    font-size: 12px;
+    color: var(--accent-green);
+}
+
+/* Кнопки */
+.btn-primary {
+    background: var(--accent-green);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(34, 197, 94, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Быстрые действия */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 24px;
+    padding: 16px 0;
+}
+
+.action-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 12px 0;
+    color: var(--text-secondary);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn i {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.action-btn span {
+    font-size: 12px;
+}
+
+.action-btn:hover {
+    background: var(--accent-green);
+    color: white;
+    border-color: var(--accent-green);
+}
+
+/* Экран замера */
+.measurement-progress {
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-green);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+#measurement-step {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.measurement-step {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.step-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.measurement-input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    color: var(--text-primary);
+    font-size: 16px;
+}
+
+.tip-box {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-green);
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.tip-box i {
+    color: var(--accent-green);
+    font-size: 20px;
+}
+
+.measurement-nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.measurement-nav button {
+    flex: 1;
+}
+
+.measurement-nav button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Экран истории */
+.history-list {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    margin-top: 20px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-date {
+    color: var(--text-secondary);
+}
+
+.history-ovr {
+    font-weight: bold;
+    color: var(--accent-green);
+}
+
+/* Календарь */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--bg-card);
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-day.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.calendar-day.today {
+    background: var(--accent-green);
+    color: white;
+}
+
+.calendar-day.has-training .training-indicator {
+    position: absolute;
+    bottom: 2px;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-green);
+    border-radius: 50%;
+}
+
+/* Профиль */
+.profile-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-green);
+    margin-bottom: 15px;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 16px;
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent-green);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.settings {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+/* Переключатель */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-green);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.setting-select {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+/* Кнопка назад */
+.back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Адаптивность */
+@media (max-width: 400px) {
+    #app {
+        padding: 12px;
+    }
+    
+    .quick-actions span {
+        display: none;
+    }
+    
+    .action-btn {
+        padding: 12px;
+    }
+    
+    .action-btn i {
+        margin-bottom: 0;
+    }
+}
